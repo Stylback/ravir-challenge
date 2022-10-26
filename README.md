@@ -47,10 +47,10 @@ RAVIR dataset is distributed under [Attribution-NonCommercial-ShareAlike 4.0 Int
 
 ## Authors
 
-| Name | Online moniker | Faculty |
-| :--- | :--- | ---: |
-| Miranda Gisudden | [aphrenia](https://github.com/aphrenia) | KTH-CBH |
-| Jonas Stylbäck | [Stylback](https://github.com/Stylback/) | KTH-CBH |
+| Name | Online moniker | Team |
+| --- | --- | --- |
+| Miranda Gisudden | [aphrenia](https://github.com/aphrenia) | KTH-CBH-CM2003-1 |
+| Jonas Stylbäck | [Stylback](https://github.com/Stylback/) | KTH-CBH-CM2003-1 |
 
 ## Running instructions
 
@@ -62,8 +62,12 @@ Information on how to run the project code.
 
 NOTE: Preliminary pipeline
 
-[pipeline diagram](https://github.com/Stylback/ravir-challenge/blob/main/media/pipeline.png?raw=true)
+![pipeline diagram](https://github.com/Stylback/ravir-challenge/blob/main/media/pipeline.png?raw=true)
 
 ## License and usage
 
-To use the RAVIR dataset you need to agree to their Data Usage Agreement, please see the [official website](https://ravir.grand-challenge.org/data/) for more information.
+Documentation and findings: TBD
+
+Source code: TBD
+
+Data usage: To use the RAVIR dataset you need to agree to their Data Usage Agreement, please see the [official website](https://ravir.grand-challenge.org/data/) for license and information.
