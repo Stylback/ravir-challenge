@@ -54,7 +54,9 @@ RAVIR dataset is distributed under [Attribution-NonCommercial-ShareAlike 4.0 Int
 
 ## Running instructions
 
-Information on how to run the project code.
+1. Download the `code` and `dataset` folders
+2. Install the prerequisite by running `prerequisite.py`
+3. Run the pipeline in `pipeline.ipynb`
 
 ## Main findings
 
