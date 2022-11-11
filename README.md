@@ -54,9 +54,10 @@ RAVIR dataset is distributed under [Attribution-NonCommercial-ShareAlike 4.0 Int
 
 ## Running instructions
 
-1. Download the `code` and `dataset` folders
-2. Install the prerequisite by running `prerequisite.py`
-3. Run the pipeline in `pipeline.ipynb`
+1. Install [Jupyter Notebook](https://jupyter.org/install)
+2. Download the `code` and `dataset` folders
+3. Open `prerequisite.ipynb` to read about the prerequisites and install dependencies
+4. Run the pipeline in `pipeline.ipynb`
 
 ## Main findings
 
