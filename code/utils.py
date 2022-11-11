@@ -11,7 +11,7 @@ import re
 import random
 
 #-------------------
-# Ensures consistent sorting across operating systems
+# Ensures consistent sorting across operating systems, used in get_file_list
 
 def natural_sort(s):
     sort = re.compile('([0-9]+)')
@@ -19,7 +19,7 @@ def natural_sort(s):
             for text in re.split(sort, s)]
 
 #-------------------
-# Takes a filepath and subfolder, returns a list of filenames from said subfolder
+# Takes a filepath and subfolder, returns a sorted list of filenames from said subfolder
 
 def get_file_list(main_path, subfolder):
     file_list = []
@@ -51,7 +51,8 @@ def get_train_val_lists(image_list, mask_list, val_ratio):
     return train_image_list, train_mask_list, val_image_list, val_mask_list
 
 #-------------------
-# Takes a list of filenames, loads them into memory with pixel values in the range [0, 1]
+# Takes a list of filenames and loads the files into memory
+# Images have their pixel values set in the range [0,1] while masks have theirs set according to relevant label
 
 def load_image(data_list, img_w, img_h, img_c, img_type):
     
@@ -76,15 +77,15 @@ def load_image(data_list, img_w, img_h, img_c, img_type):
     return image_data
 
 #-------------------
-# Takes a list of filenames and extracts weight maps from each
+# Takes a list of filenames and extracts weight maps from each before loading them into memory
 
 def extract_weight_maps(data_list, img_w, img_h):
     
-    image_data = np.zeros((len(data_list), img_w, img_h, 1),dtype='float32')
+    image_data = np.zeros((len(data_list), img_w, img_h, 1), dtype='float32')
     kernel = np.ones((3, 3), np.uint8)
     
     for i in range(len(data_list)):
-        img = cv2.imread(data_list[i],0)
+        img = cv2.imread(data_list[i], 0)
         img = cv2.resize(img[:,:], (img_w, img_h))
         img = img.reshape(img_w, img_h)/255.
 
@@ -97,7 +98,7 @@ def extract_weight_maps(data_list, img_w, img_h):
     return image_data
 
 #-------------------
-# Loads the first image in a list of filenames and displays information for testing/debugging
+# Takes the first file in a list of filenames and displays image information for testing/debugging purposes
 
 def get_image_information(data_list, img_w, img_h, img_type, loaded):
     
@@ -117,7 +118,7 @@ def get_image_information(data_list, img_w, img_h, img_type, loaded):
         plt.imshow(img)
 
 #-------------------
-# Sørensen-Dice coefficient
+# Multiclass Sørensen-Dice coefficient
 
 def dice_coef(y_true, y_pred):
     intersection = K.sum(y_true * y_pred, axis=[1,2,3])
@@ -184,7 +185,7 @@ def generator(x_train, y_train, w_train, batch_size):
     return train_generator
 
 #-------------------
-# Plot function
+# Plots model history for performance evaluation
 
 def plot_model_history(size_x, size_y, title, x_label, y_label, legend, print_keys, model_hist):
     
