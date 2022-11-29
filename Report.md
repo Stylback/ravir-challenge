@@ -23,9 +23,15 @@ The microvasculature system plays a role in diseases such as diabetes. This syst
 
 ## Methods
 
+![pipeline](https://github.com/Stylback/ravir-challenge/blob/main/media/pipeline.png?raw=true)
+
 The test set contains 19 images of retinal vessels with no corresponding masks, while the training set consist of 23 images of retinal vessels each with a corresponding mask. The training set was divided into a train and validation set with a validation ratio of 20%.
 
-U-Net is a neural network that was developed specifically for medical image segmentation. A U-Net model for multiclass classification was developed in this project. The model used batch-normalization and dropout layers with a dropout rate of 0.3. Data augmentation was performed using Keras' `ImageDataGenerator` class. Weight maps for the training and validation images were calculated from the masks. This was in order for the model to improve it's detection of vessel boundaries, which otherwise can be challenging for the model to detect since the vessel structures are so small. Model parameters, e.g. learning rate and number of filters, were adjusted until the best looking results were achieved. Number of filters was set to `8`, optimizer to `Adam`, learning rate to `10e-4`, loss function to `weighted dice loss` with a `weight strength` of `10`, and metric to `dice coefficient`. Thereafter, the model was trained.
+U-Net is a neural network that was developed specifically for medical image segmentation, which made it a suitable candidate for this project.
+
+The model used batch-normalization and dropout layers with a dropout rate of 0.3. Data augmentation was performed using Keras' `ImageDataGenerator` class. Weight maps for the training and validation images were calculated from their corresponding masks in order to improve the models detection of vessel boundaries, which otherwise can be challenging since the vessel structures are so small.
+
+Model hyperparameters, e.g. learning rate and number of filters, were adjusted until the best looking results were achieved. Number of filters was set to `8`, optimizer to `Adam`, learning rate to `10e-4`, loss function to `weighted dice loss` with a `weight strength` of `10`, and metric to `dice coefficient`. Thereafter, the model was trained.
 
 For prediction, the test set was used. Here, the images did not have masks, so a dummy weight map filled with 1:s was used in their place. Predictions were saved to a folder and then manually uploaded to the RAVIR Grand Challenge website, where evaluation was conducted server-side.
 
@@ -37,11 +43,11 @@ The model achieved poorly with a mean dice score `0.0169 ± 0.0119`, placing i
 
 ## Discussion and further improvements
 
-The task was challenging for several reasons; small dataset, small structures and high similarity between object classes were the most present. We did manage to construct a pipeline according to our outline, but we were unable to obtain satsifying results due to a flawed dice implementation.
+The task was challenging for several reasons; small dataset, small structures and high similarity between object classes. We did manage to construct a pipeline according to our outline, but we were unable to obtain satsifying results due to a flawed dice implementation.
 
 Assuming we would have gotten our loss function to work accordingly, we believe there would still have been multiple areas of improvement which we will cover further in this section.
 
-We did consider scraping the function and weight map altogether and go for a more traditional dice coefficient, but ultimately decided against it. There are lessons to learn from our shortcomings and we hope to share it with others trying a similiar approach.
+We did consider scraping the custom loss function and weight map altogether and go for a more traditional dice coefficient, but ultimately decided against it. There are lessons to learn from our shortcomings and we hope to share it with others trying a similiar approach.
 
 ### Custom dice coefficient
 
