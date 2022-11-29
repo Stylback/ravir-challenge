@@ -2,6 +2,21 @@
 
 Miranda Gisudden & Jonas Stylbäck
 
+## Table of contents
+
+- [Final Project: RAVIR Challenge](#final-project-ravir-challenge)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Methods](#methods)
+  - [Results](#results)
+  - [Discussion and further improvements](#discussion-and-further-improvements)
+    - [Custom dice coefficient](#custom-dice-coefficient)
+    - [Hyperparameters](#hyperparameters)
+    - [Data augmentation](#data-augmentation)
+    - [K-fold Cross-validation](#k-fold-cross-validation)
+    - [Dummy weight map](#dummy-weight-map)
+    - [Predictions](#predictions)
+
 ## Introduction
 
 The microvasculature system plays a role in diseases such as diabetes. This system can be directly observed only in the retina, which makes this area interesting for research. The RAVIR dataset is a new dataset that can be used for segmentation of veins and arteries in the retina. In this project, a deep learning model was developed for segmentation of retinal veins and arteries. A U-Net model was used together with data augmentation and weight maps for improved detection of vessel boundaries.
@@ -22,7 +37,7 @@ The model achieved poorly with a mean dice score `0.0169 ± 0.0119`, placing i
 
 ## Discussion and further improvements
 
-The task was challening for several reasons; small dataset, small structures and high similarity between object classes were the most present. We did manage to construct a pipeline according to our outline, but we were unable to obtain satsifying results due to a flawed dice implementation.
+The task was challenging for several reasons; small dataset, small structures and high similarity between object classes were the most present. We did manage to construct a pipeline according to our outline, but we were unable to obtain satsifying results due to a flawed dice implementation.
 
 Assuming we would have gotten our loss function to work accordingly, we believe there would still have been multiple areas of improvement which we will cover further in this section.
 
@@ -30,19 +45,19 @@ We did consider scraping the function and weight map altogether and go for a mor
 
 ### Custom dice coefficient
 
-The elephant in the room and the main reason for our low performance was due to a flawed loss function implementation. Our goal was to implement a **multi-class dice coefficient** that could also handle **weight maps**, this would allows us to both better isolate veins from artieris and keep the small structures seperated from the background.
+The main reason for our low performance was due to a flawed loss function implementation. Our goal was to implement a **multi-class dice coefficient** that could also handle **weight maps**, this would allows us to both better isolate veins from artieris and keep the small structures seperated from the background.
 
 Despite not giving rise to errors, our current implementation does not allow the model to learn across epochs. Why this is we do not yet know.
 
 ![histogram](https://github.com/Stylback/ravir-challenge/blob/main/media/histogram.png?raw=true)
 
-### Data augmentation
-
-Due to the small datset, image augmentation is a must. We implemented a modest variation of augmentation in our image generator as we saw performance hits with greater variation. We believe that with a working loss function we would have been able to combine greater variations in augmentation with additional epochs to achieve better model performance.
-
 ### Hyperparameters
 
 As the model would not learn, it was difficult to evaluate the impact and performance of different hyperparameter settings. We had to go on the initial model performance as displayed by the histogram, which also means that every hyperparameter was tuned to the biggest **inital** performance. With a working loss function, we would instead have tuned our hyperparameters to the largest long-term performance.
+
+### Data augmentation
+
+Due to the small datset, image augmentation is a must. We implemented a modest variation of augmentation in our image generator as we saw performance hits with greater variation. We believe that with a working loss function we would have been able to combine greater variations in augmentation with additional epochs to achieve better model performance.
 
 ### K-fold Cross-validation
 
@@ -54,7 +69,7 @@ In order to make predictions on the test dataset using our pipeline, we still ne
 
 At the time of writing we noticed an unintentional interaction with regards to the dummy weight map. The weight strength variable used in training would also be present in testing, which meant all predictions would be subject to a tenfold, evenly distributed weight. This could be remedied by setting the weight strength to 1 before conducting predictions.
 
-Ideally, remodeling the piple to separate the weight maps from the prediction altogheter would be preferred.
+Ideally, remodeling the pipeline to separate the weight maps from the prediction altogheter would be preferred.
 
 ### Predictions
 
@@ -63,3 +78,5 @@ The model outputs a 3 channel deep image which should correspond to the three cl
 | Before compression | After compression |
 | --- | --- | 
 | ![before compression](https://github.com/Stylback/ravir-challenge/blob/main/media/before_comp.png?raw=true) | ![after compression](https://github.com/Stylback/ravir-challenge/blob/main/media/after_comp.png?raw=true) |
+
+Ideally, the model would output a single channel deep prediction so that no further modification would be necessary.
