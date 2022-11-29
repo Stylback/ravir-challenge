@@ -47,7 +47,7 @@ RAVIR dataset is distributed under [Attribution-NonCommercial-ShareAlike 4.0 Int
 
 ## Authors
 
-| Name | Online moniker | Team |
+| Name | Nickname | Team |
 | --- | --- | --- |
 | Miranda Gisudden | [aphrenia](https://github.com/aphrenia) | KTH-CBH-CM2003-1 |
 | Jonas Stylbäck | [Stylback](https://github.com/Stylback/) | KTH-CBH-CM2003-1 |
