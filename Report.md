@@ -51,7 +51,7 @@ We did consider scraping the custom loss function and weight map altogether and 
 
 ### Custom dice coefficient
 
-The main reason for our low performance was due to a flawed loss function implementation. Our goal was to implement a **multi-class dice coefficient** that could also handle **weight maps**, this would allows us to both better isolate veins from artieris and keep the small structures seperated from the background.
+The main reason for our low performance was due to a flawed loss function implementation. Our goal was to implement a **multi-class dice coefficient** that could also handle **weight maps**, this would allows us to both better isolate veins from arteries and keep the small structures seperated from the background.
 
 Despite not giving rise to errors, our current implementation does not allow the model to learn across epochs. Why this is we do not yet know.
 
@@ -73,7 +73,7 @@ K-fold cross-validation could increase model performance. We would have not been
 
 In order to make predictions on the test dataset using our pipeline, we still needed to provide a weight map for the loss function. Our solution was to feed a matrix filled with 1:s along with the test images, as such the weight map would have minimal effect on the prediction.
 
-At the time of writing we noticed an unintentional interaction with regards to the dummy weight map. The weight strength variable used in training would also be present in testing, which meant all predictions would be subject to a tenfold, evenly distributed weight. This could be remedied by setting the weight strength to 1 before conducting predictions.
+At the time of writing we noticed an unintentional interaction with regards to the dummy weight map. The weight strength variable used in training would also be present in testing, which meant all predictions would be subject to a tenfold, evenly distributed, weight. This could be remedied by setting the weight strength to 1 before conducting predictions.
 
 Ideally, remodeling the pipeline to separate the weight maps from the prediction altogheter would be preferred.
 
