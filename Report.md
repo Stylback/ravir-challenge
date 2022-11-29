@@ -18,7 +18,7 @@ For prediction, the test set was used. Here, the images did not have masks, so a
 
 The model achieved poorly with a mean dice score `0.0169 ± 0.0119`, placing it at the bottom of the RAVIR Challenge leaderboards. This result was to be expected however, as will be discussed in the upcoming section.
 
-(image of leaderboard)
+![leaderboard](https://github.com/Stylback/ravir-challenge/blob/main/media/leaderboard.png?raw=true)
 
 ## Discussion and further improvements
 
@@ -34,7 +34,7 @@ The elephant in the room and the main reason for our low performance was due to 
 
 Despite not giving rise to errors, our current implementation does not allow the model to learn across epochs. Why this is we do not yet know.
 
-(histogram)
+![histogram](https://github.com/Stylback/ravir-challenge/blob/main/media/histogram.png?raw=true)
 
 ### Data augmentation
 
@@ -55,3 +55,11 @@ In order to make predictions on the test dataset using our pipeline, we still ne
 At the time of writing we noticed an unintentional interaction with regards to the dummy weight map. The weight strength variable used in training would also be present in testing, which meant all predictions would be subject to a tenfold, evenly distributed weight. This could be remedied by setting the weight strength to 1 before conducting predictions.
 
 Ideally, remodeling the piple to separate the weight maps from the prediction altogheter would be preferred.
+
+### Predictions
+
+The model outputs a 3 channel deep image which should correspond to the three classes; vein, artery and background respectivly. As our predictions must to be a single channel deep only according to the challenge guidelines, we had to compress our predictions before upload. The method used is flawed, we remake each image pixel-by-pixel by taking the maximum pixel value across all channels. This is not just inefficient, it also reduces class separation in the final image as can be seen below.
+
+| Before compression | After compression |
+| --- | --- | 
+| ![before compression](https://github.com/Stylback/ravir-challenge/blob/main/media/before_comp.png?raw=true) | ![after compression](https://github.com/Stylback/ravir-challenge/blob/main/media/after_comp.png?raw=true) |

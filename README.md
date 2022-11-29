@@ -55,22 +55,17 @@ RAVIR dataset is distributed under [Attribution-NonCommercial-ShareAlike 4.0 Int
 ## Running instructions
 
 1. Install [Jupyter Notebook](https://jupyter.org/install)
-2. Download the `code` and `dataset` folders
+2. Download the `code` and `dataset` folders and import them to Jupyter Notebook
 3. Open `prerequisite.ipynb` to read about the prerequisites and install dependencies
-4. Run the pipeline in `pipeline.ipynb`
+4. In `pipeline.ipynb`, change directory paths to accomondate your own environment
+5. Run the pipeline
 
-## Main findings
-
-### Pipeline
-
-NOTE: Preliminary pipeline
-
-![pipeline diagram](https://github.com/Stylback/ravir-challenge/blob/main/media/pipeline.png?raw=true)
+**Note**: For more information such as known errors and shortcomings, see the `Report.md` file in this repository.
 
 ## License and usage
 
-Documentation and findings: TBD
+Documentation and findings: [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-Source code: TBD
+Source code: [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Data usage: To use the RAVIR dataset you need to agree to their Data Usage Agreement, please see the [official website](https://ravir.grand-challenge.org/data/) for license and information.
